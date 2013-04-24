@@ -1,0 +1,17 @@
+%h1 Users
+
+- @users.each do |user|
+  %section
+    .id= user.user_id
+    %h1.text
+      = link_to user.nick, user
+    .text= user.name
+    .text= user.motto
+    .text= user.bio
+    %time
+      = "Join date: #{l(user.join_date)}"
+    .meta= "Occupation: #{user.occupation}"
+    .meta= "Company: #{user.company}"
+    .meta= "Country: #{user.country}"
+
+

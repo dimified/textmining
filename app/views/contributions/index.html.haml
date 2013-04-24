@@ -1,0 +1,15 @@
+%h1 Contributions
+
+- @contributions.each do |contribution|
+  %section
+    .id= contribution.contribution_id
+    %h2.title
+      = link_to contribution.title, contribution
+    .text= contribution.description
+    .text= contribution.questions
+    %time
+      = "Create date: #{l(contribution.create_date)}"
+    .meta= "Views: #{contribution.views}"
+    .meta= "Votes: #{contribution.votes}"
+    .text= contribution.challenge
+    .text= contribution.user

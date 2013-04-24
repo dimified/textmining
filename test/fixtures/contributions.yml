@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  contribution_id: 1
+  title: MyString
+  description: MyText
+  questions: MyText
+  create_date: 2013-04-22 21:11:57
+  views: 1
+  votes: 1
+  challenge: MyString
+  user: MyString
+
+two:
+  contribution_id: 1
+  title: MyString
+  description: MyText
+  questions: MyText
+  create_date: 2013-04-22 21:11:57
+  views: 1
+  votes: 1
+  challenge: MyString
+  user: MyString

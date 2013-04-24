@@ -1,0 +1,10 @@
+%h1= @contribution.title
+%h2= "Original Text"
+.text
+  = @contribution.description
+%h2= "Text after stop words removal"
+.text
+  = remove_stop_words_of(@contribution.description)
+%h2= "Text after pos tagging"
+.text
+  = tokenize_pos_tagging_of(remove_stop_words_of(@contribution.description))

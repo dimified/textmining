@@ -1,0 +1,13 @@
+%h1 Comments
+
+- @comments.each do |comment|
+  %section
+    .id= comment.comment_id
+    %h2.user
+      = link_to comment.user, comment
+    .text= comment.message
+    %time
+      = "Creation date: #{l(comment.create_date)}"
+    .meta= "Votes: #{comment.votes}"
+    .text= comment.challenge
+    .text= comment.contribution

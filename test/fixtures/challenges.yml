@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  challenge_id: 1
+  title: MyText
+  description: MyText
+  start_date: 2013-04-22 19:32:05
+  end_date: 2013-04-22 19:32:05
+  followers: 1
+
+two:
+  challenge_id: 1
+  title: MyText
+  description: MyText
+  start_date: 2013-04-22 19:32:05
+  end_date: 2013-04-22 19:32:05
+  followers: 1

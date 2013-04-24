@@ -1,0 +1,13 @@
+%h1= @challenge.title
+%h2= "Original Text"
+.text
+  = @challenge.description
+%h2= "Text after stop words removal"
+.text
+  = @challenge.stop_words
+  .count
+    = "Number of words: "
+    = @challenge.stop_words.count_words
+%h2= "Text after pos tagging"
+.text
+  = @challenge.pos_tags
