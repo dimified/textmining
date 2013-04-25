@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424160525) do
+ActiveRecord::Schema.define(:version => 20130425075811) do
 
   create_table "challenges", :primary_key => "challenge_id", :force => true do |t|
     t.string   "title",       :limit => 200,        :null => false
@@ -45,13 +45,6 @@ ActiveRecord::Schema.define(:version => 20130424160525) do
 
   add_index "contributions", ["title"], :name => "title_UNIQUE", :unique => true
 
-  create_table "dictionaries", :force => true do |t|
-    t.integer  "term_id"
-    t.string   "term"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "homes", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -60,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20130424160525) do
   create_table "tags", :primary_key => "tag_id", :force => true do |t|
     t.string "name",         :limit => 100
     t.string "contribution", :limit => 200, :null => false
+  end
+
+  create_table "term_matrices", :force => true do |t|
+    t.integer  "term_id"
+    t.string   "term"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :primary_key => "user_id", :force => true do |t|

@@ -1,4 +1,7 @@
 Textmining::Application.routes.draw do
+  resources :term_matrices
+
+
   root to: 'homes#index'
   resources :tags
   resources :contributions
