@@ -8,8 +8,25 @@
   .count
     = "Number of words: "
     = @challenge.stop_words.count_words
+%h2= "Text after lemmatization, removing duplicates and downcasing"
+.text
+  = @challenge.lemma.join(' ')
+  .count
+    = "Number of words: "
+    = @challenge.lemma.size
 %h2= "Text after pos tagging"
 .text
   = @challenge.pos_tags
-.dictionary
+  .count
+    = "Number of words: "
+    = @challenge.pos_tags.size
+.text
+  = link_to "Information about POS Tags", 'http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html'
+%h2= "Dictionary of #{@challenge.class}"
+.text
   = @dictionary.create_dictionary
+%h2= "Document Vector of #{@challenge.title}"
+.text
+  - @challenge.document_vector.each do |value|
+    = "| #{value} "
+  = "|"
