@@ -25,13 +25,19 @@ module LanguageProcessing
 
   def pos_tags
     text = self.stop_words
-    OpenNLP.load
+    pos_tokens = []
 
-    chunker = OpenNLP::ChunkerME.new
-    tokenizer = OpenNLP::TokenizerME.new
-    tagger = OpenNLP::POSTaggerME.new
+    StanfordCoreNLP.use :english
 
-    tokens = tokenizer.tokenize(text).to_a
-    tags = tagger.tag(tokens).to_a
+    # Available property key names for annotations
+    # :tokenize, :ssplit, :pos, :lemma, :parse, :ner, :dcoref
+    pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos)
+    text = StanfordCoreNLP::Annotation.new(text)
+    pipeline.annotate(text)
+
+    text.get(:tokens).each do |token|
+      pos_tokens.push(token.get(:part_of_speech).to_s)
+    end
+    pos_tokens
   end
 end

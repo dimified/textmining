@@ -9,6 +9,7 @@ gem 'jruby-openssl'
 
 # NLP Tools
 gem 'open-nlp'
+gem 'stanford-core-nlp'
 
 # Gems used only for assets and not required
 # in production environments by default.
