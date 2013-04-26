@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Term:
+  = @term_matrix.term_id
+%p
+  %b Term:
+  = @term_matrix.term
+
+= link_to 'Edit', edit_term_matrix_path(@term_matrix)
+\|
+= link_to 'Back', term_matrices_path

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130426175708) do
+ActiveRecord::Schema.define(:version => 20130426195628) do
 
   create_table "challenges", :primary_key => "challenge_id", :force => true do |t|
     t.string   "title",       :limit => 200,        :null => false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20130426175708) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "followers"
+    t.text     "lemma",       :limit => 2147483647
   end
 
   add_index "challenges", ["title"], :name => "title_UNIQUE", :unique => true
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20130426175708) do
     t.string   "user",         :limit => 100,        :null => false
     t.string   "challenge",    :limit => 200
     t.string   "contribution", :limit => 200
+    t.text     "lemma",        :limit => 2147483647
   end
 
   create_table "contributions", :primary_key => "contribution_id", :force => true do |t|
@@ -41,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130426175708) do
     t.integer  "votes"
     t.string   "challenge",   :limit => 200,        :null => false
     t.string   "user",        :limit => 100,        :null => false
+    t.text     "lemma",       :limit => 2147483647
   end
 
   add_index "contributions", ["title"], :name => "title_UNIQUE", :unique => true
@@ -54,6 +57,12 @@ ActiveRecord::Schema.define(:version => 20130426175708) do
     t.string "name",         :limit => 100
     t.string "contribution", :limit => 200, :null => false
   end
+
+  create_table "term_matrices", :primary_key => "term_id", :force => true do |t|
+    t.string "term", :limit => 200, :null => false
+  end
+
+  add_index "term_matrices", ["term"], :name => "term_UNIQUE", :unique => true
 
   create_table "users", :primary_key => "user_id", :force => true do |t|
     t.string   "nick",       :limit => 50,         :null => false
