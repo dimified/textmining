@@ -8,7 +8,6 @@ gem 'activerecord-jdbcmysql-adapter'
 gem 'jruby-openssl'
 
 # NLP Tools
-gem 'open-nlp'
 gem 'stanford-core-nlp'
 
 # Gems used only for assets and not required

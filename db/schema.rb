@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130426195628) do
+ActiveRecord::Schema.define(:version => 20130427095559) do
 
   create_table "challenges", :primary_key => "challenge_id", :force => true do |t|
     t.string   "title",       :limit => 200,        :null => false
@@ -53,16 +53,16 @@ ActiveRecord::Schema.define(:version => 20130426195628) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "matrices", :primary_key => "term_id", :force => true do |t|
+    t.string "term", :limit => 200, :null => false
+  end
+
+  add_index "matrices", ["term"], :name => "term_UNIQUE", :unique => true
+
   create_table "tags", :primary_key => "tag_id", :force => true do |t|
     t.string "name",         :limit => 100
     t.string "contribution", :limit => 200, :null => false
   end
-
-  create_table "term_matrices", :primary_key => "term_id", :force => true do |t|
-    t.string "term", :limit => 200, :null => false
-  end
-
-  add_index "term_matrices", ["term"], :name => "term_UNIQUE", :unique => true
 
   create_table "users", :primary_key => "user_id", :force => true do |t|
     t.string   "nick",       :limit => 50,         :null => false

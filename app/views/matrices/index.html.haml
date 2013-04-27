@@ -1,0 +1,13 @@
+%h1 Term Document Matrix
+
+%table
+  %tr
+    %th= 'DOCUMENT'
+    - @dictionary.each do |dict|
+      %th= dict
+  - @challenges.each do |challenge|
+    %tr
+      %td= 'CHALLENGE'
+      - challenge.document_vector(@dictionary).each do |value|
+        %td= value
+

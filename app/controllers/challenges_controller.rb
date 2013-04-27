@@ -14,7 +14,7 @@ class ChallengesController < ApplicationController
   # GET /challenges/1.json
   def show
     @challenge = Challenge.find(params[:id])
-    @dictionary = TermMatrix.new
+    @dictionary = Matrix.new.dictionary
 
     respond_to do |format|
       format.html # show.html.erb

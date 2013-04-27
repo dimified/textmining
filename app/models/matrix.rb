@@ -1,22 +1,18 @@
-class TermMatrix < ActiveRecord::Base
+class Matrix < ActiveRecord::Base
   attr_accessible :term, :term_id
 
-  def create_dictionary
+  def dictionary
     # hash map is twice as faster than saving directly to array
     hash = Hash.new { |h, k| h[k] = [] }
 
     #models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}
     #models = ['Challenge', 'Comment', 'Contribution']
-    models = ['Challenge']
 
     # generate hash map for all entries
-    models.each do |model|
-      model.constantize.all.each do |clas|
-        words = clas.lemma
-        words.each do |word|
-          unless hash[word[0]].include?(word)
-            hash[word[0]] << word
-          end
+    Challenge.all.each do |clas|
+      clas.processed_text.each_key do |key|
+        unless hash[key[0]].include?(key)
+          hash[key[0]] << key
         end
       end
     end

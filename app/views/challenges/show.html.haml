@@ -2,31 +2,25 @@
 %h2= "Original Text"
 .text
   = @challenge.description
-%h2= "Text after stop words removal"
-.text
-  = @challenge.stop_words
   .count
     = "Number of words: "
-    = @challenge.stop_words.count_words
-%h2= "Text after lemmatization and downcasing"
+    = @challenge.description.count_words
+%h2= "Processed text: Stop Words Removal, Lemmatization, POS Tagging, Term Frequency"
 .text
-  = @challenge.lemma.join(' ')
+  = @challenge.processed_text
   .count
     = "Number of words: "
-    = @challenge.lemma.size
-%h2= "Text after pos tagging"
-.text
-  = @challenge.pos_tags
-  .count
-    = "Number of words: "
-    = @challenge.pos_tags.size
+    = @challenge.processed_text.size
 .text
   = link_to "Information about POS Tags", 'http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html'
-%h2= "Dictionary of #{@challenge.class} (removed all duplicates)"
+%h2= "Dictionary of #{@challenge.class}"
 .text
-  = @dictionary.create_dictionary
+  = @dictionary
+  .count
+    = "Number of words: "
+    = @dictionary.size
 %h2= "Document Vector of this #{@challenge.class}"
 .text
-  - @challenge.document_vector.each do |value|
+  - @challenge.document_vector(@dictionary).each do |value|
     = "| #{value} "
   = "|"

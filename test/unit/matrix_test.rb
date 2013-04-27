@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TermMatrixTest < ActiveSupport::TestCase
+class MatrixTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

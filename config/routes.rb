@@ -1,5 +1,5 @@
 Textmining::Application.routes.draw do
-  resources :term_matrices
+  resources :matrices
 
 
   root to: 'homes#index'
