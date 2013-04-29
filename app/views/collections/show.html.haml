@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Collection:
+  = @collection.collection_id
+%p
+  %b Title:
+  = @collection.title
+%p
+  %b Description:
+  = @collection.description
+%p
+  %b User:
+  = @collection.user
+%p
+  %b Type:
+  = @collection.type
+%p
+  %b Lemma:
+  = @collection.lemma
+
+= link_to 'Edit', edit_collection_path(@collection)
+\|
+= link_to 'Back', collections_path

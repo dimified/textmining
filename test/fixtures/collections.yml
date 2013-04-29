@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  collection_id: 1
+  title: MyString
+  description: MyText
+  user: MyString
+  type: 
+  lemma: MyText
+
+two:
+  collection_id: 1
+  title: MyString
+  description: MyText
+  user: MyString
+  type: 
+  lemma: MyText

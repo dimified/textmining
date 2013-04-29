@@ -1,0 +1,29 @@
+%h1 Listing collections
+
+%table
+  %tr
+    %th Collection
+    %th Title
+    %th Description
+    %th User
+    %th Type
+    %th Lemma
+    %th
+    %th
+    %th
+
+  - @collections.each do |collection|
+    %tr
+      %td= collection.collection_id
+      %td= collection.title
+      %td= collection.description
+      %td= collection.user
+      %td= collection.type
+      %td= collection.lemma
+      %td= link_to 'Show', collection
+      %td= link_to 'Edit', edit_collection_path(collection)
+      %td= link_to 'Destroy', collection, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Collection', new_collection_path
