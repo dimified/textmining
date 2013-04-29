@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427095559) do
+ActiveRecord::Schema.define(:version => 20130429111009) do
 
   create_table "challenges", :primary_key => "challenge_id", :force => true do |t|
     t.string   "title",       :limit => 200,        :null => false
@@ -19,10 +19,18 @@ ActiveRecord::Schema.define(:version => 20130427095559) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "followers"
-    t.text     "lemma",       :limit => 2147483647
+    t.string   "type"
   end
 
   add_index "challenges", ["title"], :name => "title_UNIQUE", :unique => true
+
+  create_table "collections", :primary_key => "collection_id", :force => true do |t|
+    t.string "title",       :limit => 200,        :null => false
+    t.text   "description", :limit => 2147483647
+    t.string "user",        :limit => 100,        :null => false
+    t.string "type"
+    t.text   "lemma"
+  end
 
   create_table "comments", :primary_key => "comment_id", :force => true do |t|
     t.datetime "create_date"
@@ -31,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130427095559) do
     t.string   "user",         :limit => 100,        :null => false
     t.string   "challenge",    :limit => 200
     t.string   "contribution", :limit => 200
-    t.text     "lemma",        :limit => 2147483647
+    t.string   "type"
   end
 
   create_table "contributions", :primary_key => "contribution_id", :force => true do |t|
@@ -43,25 +51,15 @@ ActiveRecord::Schema.define(:version => 20130427095559) do
     t.integer  "votes"
     t.string   "challenge",   :limit => 200,        :null => false
     t.string   "user",        :limit => 100,        :null => false
-    t.text     "lemma",       :limit => 2147483647
+    t.string   "type"
   end
 
   add_index "contributions", ["title"], :name => "title_UNIQUE", :unique => true
 
   create_table "homes", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
-  create_table "matrices", :primary_key => "term_id", :force => true do |t|
-    t.string "term", :limit => 200, :null => false
-  end
-
-  add_index "matrices", ["term"], :name => "term_UNIQUE", :unique => true
-
-  create_table "tags", :primary_key => "tag_id", :force => true do |t|
-    t.string "name",         :limit => 100
-    t.string "contribution", :limit => 200, :null => false
+  create_table "matrices", :force => true do |t|
   end
 
   create_table "users", :primary_key => "user_id", :force => true do |t|
@@ -76,6 +74,6 @@ ActiveRecord::Schema.define(:version => 20130427095559) do
   end
 
   add_index "users", ["name"], :name => "name_UNIQUE", :unique => true
-  add_index "users", ["nick"], :name => "id_UNIQUE", :unique => true
+  add_index "users", ["nick"], :name => "nick_UNIQUE", :unique => true
 
 end

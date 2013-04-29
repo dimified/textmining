@@ -6,6 +6,7 @@ class CreateExternalDatabase < ActiveRecord::Migration
 	    t.datetime "start_date"
 	    t.datetime "end_date"
 	    t.integer  "followers"
+	    t.string   "type"
 	  end
 
 	  add_index "challenges", ["title"], :name => "title_UNIQUE", :unique => true
@@ -17,6 +18,7 @@ class CreateExternalDatabase < ActiveRecord::Migration
 	    t.string   "user",         :limit => 100,        :null => false
 	    t.string   "challenge",    :limit => 200
 	    t.string   "contribution", :limit => 200
+	    t.string   "type"
 	  end
 
 	  create_table "contributions", :primary_key => "contribution_id", :force => true do |t|
@@ -28,19 +30,10 @@ class CreateExternalDatabase < ActiveRecord::Migration
 	    t.integer  "votes"
 	    t.string   "challenge",   :limit => 200,        :null => false
 	    t.string   "user",        :limit => 100,        :null => false
+	    t.string   "type"
 	  end
 
 	  add_index "contributions", ["title"], :name => "title_UNIQUE", :unique => true
-
-	  create_table "homes", :force => true do |t|
-	    t.datetime "created_at", :null => false
-	    t.datetime "updated_at", :null => false
-	  end
-
-	  create_table "tags", :primary_key => "tag_id", :force => true do |t|
-	    t.string "name",         :limit => 100
-	    t.string "contribution", :limit => 200, :null => false
-	  end
 
 	  create_table "users", :primary_key => "user_id", :force => true do |t|
 	    t.string   "nick",       :limit => 50,         :null => false
@@ -54,7 +47,7 @@ class CreateExternalDatabase < ActiveRecord::Migration
 	  end
 
 	  add_index "users", ["name"], :name => "name_UNIQUE", :unique => true
-	  add_index "users", ["nick"], :name => "id_UNIQUE", :unique => true
+	  add_index "users", ["nick"], :name => "nick_UNIQUE", :unique => true
   end
 
   def down
