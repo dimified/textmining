@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20130429111009) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "followers"
-    t.string   "type"
+    t.string   "document"
   end
 
   add_index "challenges", ["title"], :name => "title_UNIQUE", :unique => true
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20130429111009) do
     t.string "title",       :limit => 200,        :null => false
     t.text   "description", :limit => 2147483647
     t.string "user",        :limit => 100,        :null => false
-    t.string "type"
+    t.string "document"
     t.text   "lemma"
   end
 
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130429111009) do
     t.string   "user",         :limit => 100,        :null => false
     t.string   "challenge",    :limit => 200
     t.string   "contribution", :limit => 200
-    t.string   "type"
+    t.string   "document"
   end
 
   create_table "contributions", :primary_key => "contribution_id", :force => true do |t|
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20130429111009) do
     t.integer  "votes"
     t.string   "challenge",   :limit => 200,        :null => false
     t.string   "user",        :limit => 100,        :null => false
-    t.string   "type"
+    t.string   "document"
   end
 
   add_index "contributions", ["title"], :name => "title_UNIQUE", :unique => true

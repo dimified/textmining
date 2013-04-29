@@ -1,9 +1,10 @@
 class MatricesController < ApplicationController
+  before_filter :save_lemma_text, only: [:index]
   # GET /matrices
   # GET /matrices.json
   def index
-    @dictionary = Matrix.new.dictionary
-    @challenges = Challenge.all
+    @matrix = Matrix.new
+    #@dictionary = @matrix.dictionary
 
     respond_to do |format|
       format.html # index.html.erb
@@ -79,6 +80,16 @@ class MatricesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to matrices_url }
       format.json { head :no_content }
+    end
+  end
+
+  def save_lemma_text
+    Collection.all.each do |collection|
+      text = ''
+      collection.processed_text.each_key { |term| text << term + ' ' }
+      text.chop
+      collection.lemma = text
+      collection.save
     end
   end
 end

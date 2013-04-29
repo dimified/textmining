@@ -1,17 +1,13 @@
 Textmining::Application.routes.draw do
-  resources :collections
-
-
-  resources :matrices
-
-
   root to: 'homes#index'
-  resources :tags
+  resources :collections
+  resources :matrices
   resources :contributions
   resources :homes
   resources :challenges
   resources :comments
-  resources :users  # The priority is based upon order of creation:
+  resources :users  
+  # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:

@@ -1,4 +1,5 @@
 class CollectionsController < ApplicationController
+
   # GET /collections
   # GET /collections.json
   def index
