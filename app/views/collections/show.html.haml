@@ -1,24 +1,13 @@
-%p#notice= notice
-
-%p
-  %b Collection:
-  = @collection.collection_id
-%p
-  %b Title:
-  = @collection.title
-%p
-  %b Description:
+%h1= @collection.title unless @collection.title.empty?
+%h2= "Original Text"
+.text
   = @collection.description
-%p
-  %b User:
-  = @collection.user
-%p
-  %b Type:
-  = @collection.type
-%p
-  %b Lemma:
-  = @collection.lemma
-
-= link_to 'Edit', edit_collection_path(@collection)
-\|
-= link_to 'Back', collections_path
+  .count
+    = "Number of words: "
+    = @collection.description.count_words
+%h2= "Processed text: Stop Words Removal, Lemmatization, POS Tagging, Term Frequency"
+.text
+  = @processed_text
+  .count
+    = "Number of words: "
+    = @processed_text.each_value.to_a.size

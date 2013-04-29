@@ -1,15 +1,32 @@
 class Matrix < ActiveRecord::Base
-  attr_accessible :term, :term_id
+
+  def initialize
+    save_lemma_text
+  end
 
   def dictionary
-    hash = Hash.new { |h, k| h[k] = [] }
+    total_documents = Collection.all.size
+    dictionary = Hash.new { |h, k| h[k] = 0 }
+    treshold = 0.02
 
-    # generate hash map for all entries
-    Collection.limit(20).each do |document|
-      document.processed_text.each_key do |key|
-        unless hash[key[0]].include?(key)
-          hash[key[0]] << key
-        end
+    Collection.all.each do |collection|
+      collection.lemma.split.each do |token|
+        dictionary[token] += 1
+      end
+    end
+
+    dictionary.delete_if { |key, value| (value.to_f / total_documents) <  treshold } 
+  end
+
+  protected
+
+  def save_lemma_text
+    Collection.all.each do |collection|
+      if collection.lemma.nil?
+        text = ''
+        collection.processed_text.each_key { |term| text << term + ' ' }
+        collection.lemma = text.chop
+        collection.save
       end
     end
   end

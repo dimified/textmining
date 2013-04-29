@@ -15,6 +15,7 @@ class CollectionsController < ApplicationController
   # GET /collections/1.json
   def show
     @collection = Collection.find(params[:id])
+    @processed_text = @collection.processed_text
 
     respond_to do |format|
       format.html # show.html.erb

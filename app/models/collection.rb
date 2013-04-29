@@ -3,7 +3,7 @@ class Collection < ActiveRecord::Base
 
   def processed_text
     # Natural Language Preprocessing of original text
-    original_text = description.scan(/\w+[^\d\W]/).join(' ').downcase
+    original_text = description.scan(/\w+[^\d\W_]/).join(' ').downcase
     processed_text = Hash.new
 
     # use language
@@ -29,27 +29,23 @@ class Collection < ActiveRecord::Base
     processed_text
   end
 
-  def tf_idf(term)
+  def tf_idf(term, dictionary)
+    text = processed_text
     # calculate the normalised term frequency
     # by applying the frequency of all terms
     # tf(t,d) = f(t,d) / sum(f(w,d))
-    f = processed_text[term][1] # count of specific term
-    sum_w = 0 # count of all words within the document
-    processed_text.each_value do |value|
-      sum_w += value[1]
+    f = text[term][1] # count of specific term
+    sum_w = 0         # count of all words within the document
+    text.each_value do |value|
+      sum_w = value[1]
     end
     sum_w
     tf = f.to_f / sum_w
 
     ## calculate the inversed document frequency
     ## idf(t,D) = log(sum(D) / {sum(d), t ∈ d})
-    sum_D = self.class.all.size # count of all documents
-    sum_d = 0                   # count of documents the term appears in
-    self.class.all.each do |document|
-      if document.processed_text.include?(term)
-        sum_d += 1
-      end
-    end
+    sum_D = Collection.all.size     # count of all documents
+    sum_d = dictionary[term]        # count of documents the term appears in
 
     ## absolute number are used to guarantee positive results (see literature)
     idf = Math.log(sum_D.abs.to_f / sum_d.abs)
@@ -60,17 +56,15 @@ class Collection < ActiveRecord::Base
   end
 
   def document_vector(dictionary)
-    # optional paramaters
-    #dictionary = options[:dictionary] || Matrix.new.dictionary
-
     vector = []
+    dictionary_list = dictionary.each_key.to_a.flatten
 
     # compare each term with the existing ones in the dictionary and save tf-idf
-    dictionary.each do |term|
-      if processed_text.include?(term)
-        vector[dictionary.index(term)] = tf_idf(term)
+    dictionary_list.each do |token|
+      if lemma.split.include?(token)
+        vector[dictionary_list.index(token)] = tf_idf(token, dictionary)
       else
-        vector[dictionary.index(term)] = 0
+        vector[dictionary_list.index(token)] = 0
       end
     end
     vector
