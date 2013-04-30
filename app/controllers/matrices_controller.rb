@@ -80,8 +80,9 @@ class MatricesController < ApplicationController
   end
 
   def term_matrix
-    @collections = Collection.limit(10)
-
+    @matrix = Matrix.new
+    @vectors = @matrix.vectors
+    
     respond_to do |format|
       format.html
       format.json { render json: @matrices }

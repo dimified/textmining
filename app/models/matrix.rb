@@ -4,12 +4,19 @@ class Matrix < ActiveRecord::Base
     save_lemma_text
   end
 
+  def vectors
+    vector = []
+    $record_set.each do |collection|
+      vector << collection.document_vector
+    end
+    vector
+  end
+
   def dictionary
-    total_documents = Collection.all.size
     dictionary = Hash.new { |h, k| h[k] = [0, 0] }
     treshold = 0.1
 
-    Collection.all.each do |collection|
+    $record_set.each do |collection|
       collection.lemma.split.each do |tab|
         dictionary[tab][0] += 1
       end
@@ -18,13 +25,13 @@ class Matrix < ActiveRecord::Base
       end
     end
 
-    dictionary.delete_if { |key, value| (value[1].to_f / total_documents) < treshold } 
+    dictionary.delete_if { |key, value| (value[1].to_f / $record_size) < treshold } 
   end
 
   protected
 
   def save_lemma_text
-    Collection.all.each do |collection|
+    $record_set.all.each do |collection|
       if collection.lemma.nil?
         text = ''
         collection.processed_text.each { |term| text << term + ' ' }

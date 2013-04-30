@@ -26,7 +26,6 @@ class CreateExternalDatabase < ActiveRecord::Migration
 	  create_table "contributions", :primary_key => "contribution_id", :force => true do |t|
 	    t.string   "title",       :limit => 200,        :null => false
 	    t.text     "description", :limit => 2147483647, :null => false
-	    t.text     "questions",   :limit => 2147483647
 	    t.datetime "create_date"
 	    t.integer  "views"
 	    t.integer  "votes"

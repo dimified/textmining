@@ -10,9 +10,8 @@
         = value[0]
         %br
         = value[1]
-  - @collections.each do |collection|
+  - @vectors.each do |vector|
     %tr
       %td
-        %strong= collection.id
-      - collection.document_vector.each do |value|
+      - vector.each do |value|
         %td= value
