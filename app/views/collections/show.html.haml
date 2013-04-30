@@ -1,13 +1,32 @@
-%h1= @collection.title unless @collection.title.empty?
+%h1= @collection.title
 %h2= "Original Text"
 .text
   = @collection.description
   .count
     = "Number of words: "
     = @collection.description.count_words
-%h2= "Processed text: Stop Words Removal, Lemmatization, POS Tagging, Term Frequency"
+%h2= "Stop Words Removal and Lemmatization"
 .text
-  = @processed_text
+  = @collection.lemma
   .count
     = "Number of words: "
-    = @processed_text.each_value.to_a.size
+    = @collection.lemma.split.size
+%h2= "Duplicates Removal"
+.text
+  = @collection.lemma.split.uniq
+  .count
+    = "Number of words: "
+    = @collection.lemma.split.uniq.size
+.text
+  = link_to "Information about POS Tags", 'http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html'
+%h2= "Dictionary of #{@collection.class}"
+.text
+  = $dictionary
+  .count
+    = "Number of words: "
+    = $dictionary.size
+%h2= "Document Vector of this #{@collection.class}"
+.text
+  - @collection.document_vector.each do |value|
+    = "| #{value} "
+  = "|"

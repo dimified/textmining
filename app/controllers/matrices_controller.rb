@@ -2,11 +2,6 @@ class MatricesController < ApplicationController
   # GET /matrices
   # GET /matrices.json
   def index
-    @matrix = Matrix.new
-    @dictionary = @matrix.dictionary
-    @dictionary_tokens = @matrix.dictionary.each_key.to_a.flatten
-    @collections = Collection.limit(1)
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @matrices }
@@ -81,6 +76,24 @@ class MatricesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to matrices_url }
       format.json { head :no_content }
+    end
+  end
+
+  def term_matrix
+    @collections = Collection.limit(10)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @matrices }
+    end
+  end
+
+  def document_matrix
+    @collections = Collection.limit(10)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @matrices }
     end
   end
 end

@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  after_filter :save_lemma_text, only: [:index]
+
   # GET /comments
   # GET /comments.json
   def index
@@ -78,6 +80,17 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to comments_url }
       format.json { head :no_content }
+    end
+  end
+
+  def save_lemma_text
+    Comment.all.each do |document|
+      if document.lemma.nil?
+        text = ''
+        document.processed_text.each { |term| text << term + ' ' }
+        document.lemma = text.chop
+        document.save
+      end
     end
   end
 end

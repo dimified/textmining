@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Dummy:
+  = @dummy.dummy_id
+%p
+  %b Title:
+  = @dummy.title
+%p
+  %b Description:
+  = @dummy.description
+%p
+  %b User:
+  = @dummy.user
+%p
+  %b Document:
+  = @dummy.document
+%p
+  %b Lemma:
+  = @dummy.lemma
+
+= link_to 'Edit', edit_dummy_path(@dummy)
+\|
+= link_to 'Back', dummies_path

@@ -1,10 +1,32 @@
 %h1= @comment.user
 %h2= "Original Text"
 .text
-  = @comment.message
-%h2= "Text after stop words removal"
+  = @comment.description
+  .count
+    = "Number of words: "
+    = @comment.description.count_words
+%h2= "Stop Words Removal and Lemmatization"
 .text
-  = remove_stop_words_of(@comment.message)
-%h2= "Text after pos tagging"
+  = @comment.lemma
+  .count
+    = "Number of words: "
+    = @comment.lemma.split.size
+%h2= "Duplicates Removal"
 .text
-  = tokenize_pos_tagging_of(remove_stop_words_of(@comment.message))
+  = @comment.lemma.split.uniq
+  .count
+    = "Number of words: "
+    = @comment.lemma.split.uniq.size
+.text
+  = link_to "Information about POS Tags", 'http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html'
+%h2= "Dictionary of #{@comment.class}"
+.text
+  = $dictionary
+  .count
+    = "Number of words: "
+    = $dictionary.size
+%h2= "Document Vector of this #{@comment.class}"
+.text
+  - @comment.document_vector.each do |value|
+    = "| #{value} "
+  = "|"

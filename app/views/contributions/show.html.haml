@@ -2,9 +2,31 @@
 %h2= "Original Text"
 .text
   = @contribution.description
-%h2= "Text after stop words removal"
+  .count
+    = "Number of words: "
+    = @contribution.description.count_words
+%h2= "Stop Words Removal and Lemmatization"
 .text
-  = remove_stop_words_of(@contribution.description)
-%h2= "Text after pos tagging"
+  = @contribution.lemma
+  .count
+    = "Number of words: "
+    = @contribution.lemma.split.size
+%h2= "Duplicates Removal"
 .text
-  = tokenize_pos_tagging_of(remove_stop_words_of(@contribution.description))
+  = @contribution.lemma.split.uniq
+  .count
+    = "Number of words: "
+    = @contribution.lemma.split.uniq.size
+.text
+  = link_to "Information about POS Tags", 'http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html'
+%h2= "Dictionary of #{@contribution.class}"
+.text
+  = $dictionary
+  .count
+    = "Number of words: "
+    = $dictionary.size
+%h2= "Document Vector of this #{@contribution.class}"
+.text
+  - @contribution.document_vector.each do |value|
+    = "| #{value} "
+  = "|"

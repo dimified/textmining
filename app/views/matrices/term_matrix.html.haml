@@ -1,0 +1,18 @@
+%h1= "Term Document Matrix"
+= "Dictionary Size: #{$dictionary.size}"
+%table
+  %tr
+    %td
+    - $dictionary.each do |key, value|
+      %td
+        %strong= key
+        %br
+        = value[0]
+        %br
+        = value[1]
+  - @collections.each do |collection|
+    %tr
+      %td
+        %strong= collection.id
+      - collection.document_vector.each do |value|
+        %td= value

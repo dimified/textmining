@@ -5,4 +5,6 @@ class ApplicationController < ActionController::Base
   File.open(Dir.pwd + '/app/assets/documents/stopwords_en.txt', 'r').each_line do |line|
     $stop_words.push(line.strip)
   end
+  
+  $dictionary = Matrix.new.dictionary
 end

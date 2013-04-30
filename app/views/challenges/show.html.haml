@@ -5,22 +5,28 @@
   .count
     = "Number of words: "
     = @challenge.description.count_words
-%h2= "Processed text: Stop Words Removal, Lemmatization, POS Tagging, Term Frequency"
+%h2= "Stop Words Removal and Lemmatization"
 .text
-  = @challenge.processed_text
+  = @challenge.lemma
   .count
     = "Number of words: "
-    = @challenge.processed_text.size
+    = @challenge.lemma.split.size
+%h2= "Duplicates Removal"
+.text
+  = @challenge.lemma.split.uniq
+  .count
+    = "Number of words: "
+    = @challenge.lemma.split.uniq.size
 .text
   = link_to "Information about POS Tags", 'http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html'
 %h2= "Dictionary of #{@challenge.class}"
 .text
-  = @dictionary
+  = $dictionary
   .count
     = "Number of words: "
-    = @dictionary.size
+    = $dictionary.size
 %h2= "Document Vector of this #{@challenge.class}"
 .text
-  - @challenge.document_vector(@dictionary).each do |value|
+  - @challenge.document_vector.each do |value|
     = "| #{value} "
   = "|"

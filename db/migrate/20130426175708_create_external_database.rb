@@ -1,5 +1,5 @@
 class CreateExternalDatabase < ActiveRecord::Migration
-  def up
+  def change
   	create_table "challenges", :primary_key => "challenge_id", :force => true do |t|
 	    t.string   "title",       :limit => 200,        :null => false
 	    t.text     "description", :limit => 2147483647, :null => false
@@ -7,6 +7,7 @@ class CreateExternalDatabase < ActiveRecord::Migration
 	    t.datetime "end_date"
 	    t.integer  "followers"
 	    t.string   "document"
+	    t.text 		 "lemma"
 	  end
 
 	  add_index "challenges", ["title"], :name => "title_UNIQUE", :unique => true
@@ -19,6 +20,7 @@ class CreateExternalDatabase < ActiveRecord::Migration
 	    t.string   "challenge",    :limit => 200
 	    t.string   "contribution", :limit => 200
 	    t.string   "document"
+	    t.text 		 "lemma"
 	  end
 
 	  create_table "contributions", :primary_key => "contribution_id", :force => true do |t|
@@ -31,6 +33,7 @@ class CreateExternalDatabase < ActiveRecord::Migration
 	    t.string   "challenge",   :limit => 200,        :null => false
 	    t.string   "user",        :limit => 100,        :null => false
 	    t.string   "document"
+	    t.text 		 "lemma"
 	  end
 
 	  add_index "contributions", ["title"], :name => "title_UNIQUE", :unique => true
@@ -48,8 +51,5 @@ class CreateExternalDatabase < ActiveRecord::Migration
 
 	  add_index "users", ["name"], :name => "name_UNIQUE", :unique => true
 	  add_index "users", ["nick"], :name => "nick_UNIQUE", :unique => true
-  end
-
-  def down
   end
 end

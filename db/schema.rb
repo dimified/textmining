@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429111009) do
+ActiveRecord::Schema.define(:version => 20130429194356) do
 
   create_table "challenges", :primary_key => "challenge_id", :force => true do |t|
     t.string   "title",       :limit => 200,        :null => false
-    t.text     "description", :limit => 2147483647
+    t.text     "description", :limit => 2147483647, :null => false
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "followers"
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(:version => 20130429111009) do
   add_index "challenges", ["title"], :name => "title_UNIQUE", :unique => true
 
   create_table "collections", :primary_key => "collection_id", :force => true do |t|
-    t.string "title",       :limit => 200,        :null => false
-    t.text   "description", :limit => 2147483647
+    t.string "title",       :limit => 200
+    t.text   "description", :limit => 2147483647, :null => false
     t.string "user",        :limit => 100,        :null => false
     t.string "document"
     t.text   "lemma"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130429111009) do
 
   create_table "comments", :primary_key => "comment_id", :force => true do |t|
     t.datetime "create_date"
-    t.text     "description",  :limit => 2147483647
+    t.text     "description",  :limit => 2147483647, :null => false
     t.integer  "votes"
     t.string   "user",         :limit => 100,        :null => false
     t.string   "challenge",    :limit => 200
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20130429111009) do
 
   create_table "contributions", :primary_key => "contribution_id", :force => true do |t|
     t.string   "title",       :limit => 200,        :null => false
-    t.text     "description", :limit => 2147483647
+    t.text     "description", :limit => 2147483647, :null => false
     t.text     "questions",   :limit => 2147483647
     t.datetime "create_date"
     t.integer  "views"
@@ -54,7 +54,13 @@ ActiveRecord::Schema.define(:version => 20130429111009) do
     t.string   "document"
   end
 
-  add_index "contributions", ["title"], :name => "title_UNIQUE", :unique => true
+  create_table "dummies", :primary_key => "dummy_id", :force => true do |t|
+    t.string "title",       :limit => 200
+    t.text   "description", :limit => 2147483647, :null => false
+    t.string "user",        :limit => 100,        :null => false
+    t.string "document"
+    t.text   "lemma"
+  end
 
   create_table "homes", :force => true do |t|
   end

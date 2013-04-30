@@ -1,7 +1,12 @@
 Textmining::Application.routes.draw do
   root to: 'homes#index'
+  resources :dummies
   resources :collections
   resources :matrices
+
+  match 'term_matrix' => 'matrices#term_matrix'
+  match 'document_matrix' => 'matrices#document_matrix'
+
   resources :contributions
   resources :homes
   resources :challenges

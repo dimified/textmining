@@ -5,7 +5,7 @@
     .id= comment.comment_id
     %h2.user
       = link_to comment.user, comment
-    .text= comment.message
+    .text= comment.description
     %time
       = "Creation date: #{l(comment.create_date)}"
     .meta= "Votes: #{comment.votes}"
