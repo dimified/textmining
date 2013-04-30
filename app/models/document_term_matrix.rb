@@ -1,20 +1,24 @@
-class Matrix < ActiveRecord::Base
-
-  def initialize
-    save_lemma_text
+class DocumentTermMatrix < ActiveRecord::Base
+  
+  def term_vectors
+    vector = []
+    $record_set.each do |record|
+      vector << record.document_vector
+    end
+    vector
   end
 
-  def vectors
+  def document_vectors
     vector = []
-    $record_set.each do |collection|
-      vector << collection.document_vector
+    $record_set.each do |record|
+      vector << record.sim_vector
     end
     vector
   end
 
   def dictionary
     dictionary = Hash.new { |h, k| h[k] = [0, 0] }
-    treshold = 0.1
+    treshold = 0.05
 
     $record_set.each do |collection|
       collection.lemma.split.each do |tab|
@@ -28,10 +32,8 @@ class Matrix < ActiveRecord::Base
     dictionary.delete_if { |key, value| (value[1].to_f / $record_size) < treshold } 
   end
 
-  protected
-
   def save_lemma_text
-    $record_set.all.each do |collection|
+    $record_set.each do |collection|
       if collection.lemma.nil?
         text = ''
         collection.processed_text.each { |term| text << term + ' ' }

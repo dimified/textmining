@@ -1,0 +1,13 @@
+%h1= "Document Document Matrix"
+%table
+  %tr
+    %td
+    - @document_vectors.each_index do |i|
+      %td
+        %strong= i
+  - @document_vectors.each_index do |i|
+    %tr
+      %td
+        %strong= i
+      - @document_vectors[i].each do |value|
+        %td= value

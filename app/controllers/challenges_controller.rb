@@ -1,6 +1,4 @@
 class ChallengesController < ApplicationController
-  after_filter :save_lemma_text, only: [:index]
-
   # GET /challenges
   # GET /challenges.json
   def index
@@ -81,17 +79,6 @@ class ChallengesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to challenges_url }
       format.json { head :no_content }
-    end
-  end
-
-  def save_lemma_text
-    Challenge.all.each do |document|
-      if document.lemma.nil?
-        text = ''
-        document.processed_text.each { |term| text << term + ' ' }
-        document.lemma = text.chop
-        document.save
-      end
     end
   end
 end

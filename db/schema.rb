@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429194356) do
+ActiveRecord::Schema.define(:version => 20130430160136) do
 
   create_table "challenges", :primary_key => "challenge_id", :force => true do |t|
     t.string   "title",       :limit => 200,        :null => false
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20130429194356) do
     t.datetime "end_date"
     t.integer  "followers"
     t.string   "document"
+    t.text     "lemma",       :limit => 2147483647
   end
 
   add_index "challenges", ["title"], :name => "title_UNIQUE", :unique => true
@@ -40,18 +41,22 @@ ActiveRecord::Schema.define(:version => 20130429194356) do
     t.string   "challenge",    :limit => 200
     t.string   "contribution", :limit => 200
     t.string   "document"
+    t.text     "lemma",        :limit => 2147483647
   end
 
   create_table "contributions", :primary_key => "contribution_id", :force => true do |t|
     t.string   "title",       :limit => 200,        :null => false
     t.text     "description", :limit => 2147483647, :null => false
-    t.text     "questions",   :limit => 2147483647
     t.datetime "create_date"
     t.integer  "views"
     t.integer  "votes"
     t.string   "challenge",   :limit => 200,        :null => false
     t.string   "user",        :limit => 100,        :null => false
     t.string   "document"
+    t.text     "lemma",       :limit => 2147483647
+  end
+
+  create_table "document_term_matrices", :force => true do |t|
   end
 
   create_table "dummies", :primary_key => "dummy_id", :force => true do |t|
@@ -63,9 +68,6 @@ ActiveRecord::Schema.define(:version => 20130429194356) do
   end
 
   create_table "homes", :force => true do |t|
-  end
-
-  create_table "matrices", :force => true do |t|
   end
 
   create_table "users", :primary_key => "user_id", :force => true do |t|

@@ -10,8 +10,9 @@
         = value[0]
         %br
         = value[1]
-  - @vectors.each do |vector|
+  - @term_vectors.each_index do |i|
     %tr
-      %td
-      - vector.each do |value|
+      %td= i
+      - @term_vectors[i].each do |value|
         %td= value
+        

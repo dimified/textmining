@@ -1,17 +1,17 @@
 Textmining::Application.routes.draw do
   root to: 'homes#index'
   resources :dummies
-  resources :collections
-  resources :matrices
-
-  match 'term_matrix' => 'matrices#term_matrix'
-  match 'document_matrix' => 'matrices#document_matrix'
-
+  resources :collections  
   resources :contributions
   resources :homes
   resources :challenges
   resources :comments
   resources :users  
+  resources :document_term_matrices
+
+  match 'term_matrix' => 'document_term_matrices#term_matrix'
+  match 'document_matrix' => 'document_term_matrices#document_matrix'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

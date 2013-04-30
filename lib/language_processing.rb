@@ -1,5 +1,6 @@
 module LanguageProcessing
-	def processed_text
+
+  def processed_text
     # Natural Language Preprocessing of original text
     original_text = description.scan(/\w+[^\d\W_]/).join(' ').downcase
     processed_text = []
@@ -59,31 +60,28 @@ module LanguageProcessing
     vector
   end
 
-  def sim_cosinus(d2)
-    numerator = 0
+  def sim_cosinus(d1, d2)
+    sum_d0 = 0
     sum_d1 = 0
     sum_d2 = 0
-
-    document_vector.each_index do |idx|
-      numerator += (document_vector[idx] * d2[idx])
-    end
-
-    document_vector.each_index do |idx|
-      sum_d1 += document_vector[idx]**2
+    d1.each_index do |idx|
+      sum_d0 += d1[idx] * d2[idx]
+      sum_d1 += d1[idx]**2
       sum_d2 += d2[idx]**2
     end
-    sum_d1 = Math.sqrt(sum_d1)
-    sum_d2 = Math.sqrt(sum_d2)
-    denominator = sum_d1 * sum_d2
-
-    cosinus = numerator / denominator
-    cosinus.round(5)
+    sim_cosinus = sum_d0 / ( (Math.sqrt(sum_d1)) *  (Math.sqrt(sum_d2)) )
+    sim_cosinus.round(5)
   end
+
+ # def sim_pearson(d1, d2)
+  #  Statsample::Bivariate.pearson(d1, d2)
+  #end
 
   def sim_vector
     vector = []
-    self.class.all.each do |document|
-      vector << sim_cosinus(document.document_vector)
+    doc_vec = document_vector
+    $record_set.each do |record|
+      vector << sim_cosinus(doc_vec, record.document_vector)
     end
     vector
   end
