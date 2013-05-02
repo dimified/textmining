@@ -8,7 +8,9 @@ Textmining::Application.routes.draw do
   resources :comments
   resources :users  
   resources :document_term_matrices
-
+  #resources :optics_clusterings
+  
+  match 'optics_clustering' => 'optics_clusterings#optics_clustering'
   match 'term_matrix' => 'document_term_matrices#term_matrix'
   match 'document_matrix' => 'document_term_matrices#document_matrix'
   

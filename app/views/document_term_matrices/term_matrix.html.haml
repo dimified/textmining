@@ -11,8 +11,28 @@
         %br
         = value[1]
   - @term_vectors.each_index do |i|
-    %tr
+    %tr{id: i}
       %td= i
-      - @term_vectors[i].each do |value|
+      - @term_vectors[i].each_value do |value|
         %td= value
+
+:javascript
+  term_matrix = #{@term_vectors.to_json};
+  document_matrix = #{@document_vectors.to_json};
+
+:javascript
+  var optics = null;
+  
+  window.onload = function(){
+    
+    optics = new OPTICS(term_matrix);
+
+    var epsilon = 0.9; //0.7
+    var minPts = 3; // single-link effect at 1
+      
+    var output = optics.start(epsilon,minPts);
+      
+    img = optics.drawBarChartPlot(output, epsilon, minPts, #{$record_size * 11}, 800);
+    document.body.appendChild(img);
+  };
         

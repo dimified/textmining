@@ -46,7 +46,7 @@ module LanguageProcessing
   end
 
   def document_vector
-    vector = []
+    vector = Hash.new
     dictionary_list = $dictionary.each_key.to_a
 
     # compare each term with the existing ones in the dictionary and save tf-idf
@@ -61,27 +61,34 @@ module LanguageProcessing
   end
 
   def sim_cosinus(d1, d2)
+
+    # sum = 0
+    # d1.each_key do |key|
+    #   sum += ((d1[key] - d2[key]) * (d1[key] - d2[key]));
+    # end
+    # result = Math.sqrt(sum);
     sum_d0 = 0
     sum_d1 = 0
     sum_d2 = 0
-    d1.each_index do |idx|
-      sum_d0 += d1[idx] * d2[idx]
-      sum_d1 += d1[idx]**2
-      sum_d2 += d2[idx]**2
+    d1.each_key do |key|
+      sum_d0 = sum_d0 + (d1[key] * d2[key])
+      sum_d1 = sum_d1 + (d1[key] ** 2)
+      sum_d2 = sum_d2 + (d2[key] ** 2)
     end
-    sim_cosinus = sum_d0 / ( (Math.sqrt(sum_d1)) *  (Math.sqrt(sum_d2)) )
-    sim_cosinus.round(5)
+
+    if (sum_d0 == 0 || sum_d1 == 0 || sum_d2 == 0)
+      sim_cosinus = 0
+    else
+      sim_cosinus = sum_d0 / ( (Math.sqrt(sum_d1)) * (Math.sqrt(sum_d2)) )
+    end
+    sim_cosinus
   end
 
- # def sim_pearson(d1, d2)
-  #  Statsample::Bivariate.pearson(d1, d2)
-  #end
-
   def sim_vector
-    vector = []
+    vector = Hash.new
     doc_vec = document_vector
-    $record_set.each do |record|
-      vector << sim_cosinus(doc_vec, record.document_vector)
+    $record_set.each_index do |idx|
+      vector[idx] = sim_cosinus(doc_vec, $record_set[idx].document_vector)
     end
     vector
   end

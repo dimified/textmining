@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     $stop_words.push(line.strip)
   end
 
-  $record_set = Collection.limit(30)
+  $record_set = Collection.limit(200)
   $record_size = $record_set.size
   
   $dictionary = DocumentTermMatrix.new.dictionary

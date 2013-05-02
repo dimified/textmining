@@ -18,7 +18,7 @@ class DocumentTermMatrix < ActiveRecord::Base
 
   def dictionary
     dictionary = Hash.new { |h, k| h[k] = [0, 0] }
-    treshold = 0.05
+    treshold = 0.075
 
     $record_set.each do |collection|
       collection.lemma.split.each do |tab|

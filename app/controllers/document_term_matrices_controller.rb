@@ -84,6 +84,7 @@ class DocumentTermMatricesController < ApplicationController
   def term_matrix
     @term_matrix = DocumentTermMatrix.new
     @term_vectors = @term_matrix.term_vectors
+    @document_vectors = @term_matrix.document_vectors
     
     respond_to do |format|
       format.html

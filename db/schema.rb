@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130430160136) do
+ActiveRecord::Schema.define(:version => 20130430212943) do
 
   create_table "challenges", :primary_key => "challenge_id", :force => true do |t|
     t.string   "title",       :limit => 200,        :null => false
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(:version => 20130430160136) do
   end
 
   add_index "challenges", ["title"], :name => "title_UNIQUE", :unique => true
+
+  create_table "clusterings", :force => true do |t|
+  end
 
   create_table "collections", :primary_key => "collection_id", :force => true do |t|
     t.string "title",       :limit => 200
@@ -68,6 +71,9 @@ ActiveRecord::Schema.define(:version => 20130430160136) do
   end
 
   create_table "homes", :force => true do |t|
+  end
+
+  create_table "optics_clusterings", :force => true do |t|
   end
 
   create_table "users", :primary_key => "user_id", :force => true do |t|
