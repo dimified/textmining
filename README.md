@@ -43,3 +43,7 @@ The script "open_import.sh" imports the xml files into the database. It consider
     ./user_import.sh
 
 The script "user_import.sh" does take the version or date respectively as well as a parameter for importing xml files into the database.
+
+## 4. Starting the Application
+
+The application is build on jRuby. For starting the application you have to use jruby `rvm use jruby` (if RVM is installed)
