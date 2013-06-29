@@ -26,8 +26,9 @@
   window.onload = function(){
     
     optics = new OPTICS(term_matrix);
-
-    var epsilon = 0.9; //0.7
+    
+    // also try: epsilon = 0.7, minPts = 5
+    var epsilon = 0.9;
     var minPts = 3; // single-link effect at 1
       
     var output = optics.start(epsilon,minPts);
